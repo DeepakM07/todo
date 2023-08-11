@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title ToDo App
+  body
+    h1 ToDo List
+    // Create a form for adding new ToDo items
+    form(action="/add", method="POST")
+      input(type="text", name="text", placeholder="New ToDo", required)
+      button(type="submit") Add
+
+    // Display the list of ToDo items
+    ul
+      each todo, index in todos
+        li
+          // Display the ToDo text
+          = todo.text
+
+          // If the ToDo is not completed, show a "Complete" button
+          if !todo.completed
+            form(action='/update/' + index, method="POST")
+              button(type="submit") Complete
+
+          // Create a form for deleting a ToDo item
+          form(action='/delete/' + index, method="POST")
+            button(type="submit") Delete
